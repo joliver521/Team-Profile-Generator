@@ -1,12 +1,16 @@
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
+
 const inquirer = require('inquirer');
 const path = require('path');
+
 const fs = require('fs');
 
 const OUTPUT = path.resolve(__dirname, 'output');
 const outputPath = path.join(OUTPUT, 'team.html');
+
+const render = require('./src/formatHtml');
 
 const team = [];
 
@@ -28,6 +32,8 @@ function employeeInformation() {
                 engineerInformation();
             } else if (val.name === 'Intern') {
                 internInformation();
+            } else if (val.name === 'Create Summary') {
+                generateHTML(outputPath, render(team));
             }
         });
 } // end of function
@@ -147,7 +153,7 @@ function internInformation() {
 } // end of function
 
 function generateHTML(fileName, data) {
-    fs.writeFile(fileName, data, utf8, function (err) {
+    fs.writeFile(fileName, data, 'utf8', function (err) {
         if (err) {
             throw err;
         }
