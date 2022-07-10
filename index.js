@@ -69,5 +69,81 @@ function managerInformation() {
     });
 } // end of function
 
+// Prompt to collect information on engineers
+function engineerInformation() {
+  return inquirer
+    .prompt([
+      {
+        type: 'input',
+        message: "what is your engineer's name?",
+        name: 'name',
+      },
+      {
+        type: 'input',
+        message: "What is your engineer's ID",
+        name: 'id',
+      },
+      {
+        type: 'input',
+        message: "What is your engineer's email?",
+        name: 'email',
+      },
+      {
+        type: 'input',
+        message: "What is your engineer's GitHub username",
+        name: 'GitHub',
+      },
+    ])
+    .then(function (answer) {
+      let engineer = new Engineer(
+        answer.name,
+        answer.id,
+        answer.email,
+        answer.GitHub
+      );
+      team.push(engineer);
+
+      employeeInformation();
+    });
+} // end of function
+
+// Prompt to collect information on intern
+function internInformation() {
+  return inquirer
+    .prompt([
+      {
+        type: 'input',
+        message: "what is your intern's name?",
+        name: 'name',
+      },
+      {
+        type: 'input',
+        message: "What is your intern's ID",
+        name: 'id',
+      },
+      {
+        type: 'input',
+        message: "What is your intern's email?",
+        name: 'email',
+      },
+      {
+        type: 'input',
+        message: "What is your intern's school",
+        name: 'school',
+      },
+    ])
+    .then(function (answer) {
+      let intern = new Intern(
+        answer.name,
+        answer.id,
+        answer.email,
+        answer.school
+      );
+      team.push(intern);
+
+      employeeInformation();
+    });
+} // end of function
+
 // Calls function to begin prompts
 employeeInformation();
