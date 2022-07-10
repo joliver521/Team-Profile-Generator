@@ -3,6 +3,7 @@ const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 const inquirer = require('inquirer');
 const path = require('path');
+const fs = require('fs');
 
 const OUTPUT = path.resolve(__dirname, 'output');
 const outputPath = path.join(OUTPUT, 'team.html');
@@ -17,7 +18,7 @@ function employeeInformation() {
                 type: 'list',
                 message: 'What type of employee would you like to input',
                 name: 'name',
-                choices: ['Manager', 'Engineer', 'Intern'],
+                choices: ['Manager', 'Engineer', 'Intern', 'Create Summary'],
             },
         ])
         .then(val => {
@@ -42,7 +43,7 @@ function managerInformation() {
             },
             {
                 type: 'input',
-                message: "What is your manager's id",
+                message: "What is your manager's ID?",
                 name: 'id',
             },
             {
@@ -52,7 +53,7 @@ function managerInformation() {
             },
             {
                 type: 'input',
-                message: "What is your manager's office number",
+                message: "What is your manager's office number?",
                 name: 'number',
             },
         ])
@@ -80,7 +81,7 @@ function engineerInformation() {
             },
             {
                 type: 'input',
-                message: "What is your engineer's ID",
+                message: "What is your engineer's ID?",
                 name: 'id',
             },
             {
@@ -90,7 +91,7 @@ function engineerInformation() {
             },
             {
                 type: 'input',
-                message: "What is your engineer's GitHub username",
+                message: "What is your engineer's GitHub username?",
                 name: 'GitHub',
             },
         ])
@@ -118,7 +119,7 @@ function internInformation() {
             },
             {
                 type: 'input',
-                message: "What is your intern's ID",
+                message: "What is your intern's ID?",
                 name: 'id',
             },
             {
@@ -128,7 +129,7 @@ function internInformation() {
             },
             {
                 type: 'input',
-                message: "What is your intern's school",
+                message: "What is your intern's school?",
                 name: 'school',
             },
         ])
@@ -144,6 +145,15 @@ function internInformation() {
             employeeInformation();
         });
 } // end of function
+
+function generateHTML(fileName, data) {
+    fs.writeFile(fileName, data, utf8, function (err) {
+        if (err) {
+            throw err;
+        }
+        console.log(`Your Team Profile was written successfully!`);
+    });
+}
 
 // Calls function to begin prompts
 employeeInformation();
